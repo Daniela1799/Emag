@@ -1,0 +1,56 @@
+<html>
+
+  <head>
+        <title> Homepage </title>
+        <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
+  </head>
+
+  <body> 
+      <div class="container">
+          <div class="col-12 jumbotron">
+
+          <form method="POST" action="adauga.php">
+              <span class="col-12 badge badge-success" style="display: none;" id="verde"> </span>
+              Nume produs:<input type="text" name="nume" id="nume" class="form-control"><br />
+              Pret produs:<input type="number" name="pret" id="pret" class="form-control"><br />
+              Categorie:
+               <select class="form-control" name="categorie"id="categorie">
+                  <option>Electronics</option>
+                  <option>Gradina</option>
+                  <option>Piese auto</option>
+               </select>
+              <br />
+              <input type="submit" name="submit" id="adauga" value="Adauga" class="btn btn-primary">
+            </form>
+          </div>
+      </div>
+
+
+      <script src="js/jquery.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+
+      <script>
+        $(document).ready(function(){
+          $("#adauga").click(function(event){
+            event.preventDefault();
+            var numeProdus;
+            var pretProdus;
+            var categorieProdus;
+
+            numeProdus = $("#nume").val();
+            pretProdus = $("#pret").val();
+            categorieProdus = $("#categorie").val();
+
+            console.log(numeProdus, pretProdus, categorieProdus);
+
+            $.post("adauga.php", {nume: numeProdus, pret: pretProdus, categorie: categorieProdus},function(data){
+                $("#verde").html(data);
+                $("#verde").fadeIn('slow');
+            });
+
+          });
+        });
+        </script>
+  </body>
+</html>
